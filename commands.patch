@@ -1,0 +1,36 @@
+--- commands.cfg	2012-10-14 15:29:14.000000000 +0530
++++ commands.cfg1	2012-10-14 15:24:29.000000000 +0530
+@@ -37,7 +37,15 @@
+ 	}
+ 
+ 
++define command{
++       command_name    process-service-perfdata
++       command_line    /bin/mv /opt/nagios/addons/pnp/var/service-perfdata /opt/nagios/addons/pnp/var/spool/service-perfdata.$TIMET$
++}
+ 
++define command{
++       command_name    process-host-perfdata
++       command_line    /bin/mv /opt/nagios/addons/pnp/var/host-perfdata /opt/nagios/addons/pnp/var/spool/host-perfdata.$TIMET$
++}
+ 
+ 
+ ################################################################################
+@@ -224,17 +232,3 @@
+ ################################################################################
+ 
+ 
+-# 'process-host-perfdata' command definition
+-define command{
+-	command_name	process-host-perfdata
+-	command_line	/usr/bin/printf "%b" "$LASTHOSTCHECK$\t$HOSTNAME$\t$HOSTSTATE$\t$HOSTATTEMPT$\t$HOSTSTATETYPE$\t$HOSTEXECUTIONTIME$\t$HOSTOUTPUT$\t$HOSTPERFDATA$\n" >> /opt/nagios/var/host-perfdata.out
+-	}
+-
+-
+-# 'process-service-perfdata' command definition
+-define command{
+-	command_name	process-service-perfdata
+-	command_line	/usr/bin/printf "%b" "$LASTSERVICECHECK$\t$HOSTNAME$\t$SERVICEDESC$\t$SERVICESTATE$\t$SERVICEATTEMPT$\t$SERVICESTATETYPE$\t$SERVICEEXECUTIONTIME$\t$SERVICELATENCY$\t$SERVICEOUTPUT$\t$SERVICEPERFDATA$\n" >> /opt/nagios/var/service-perfdata.out
+-	}
+-
+-

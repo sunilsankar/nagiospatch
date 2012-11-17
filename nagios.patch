@@ -1,0 +1,34 @@
+--- nagios.cfg	2012-10-14 15:07:48.000000000 +0530
++++ nagios.cfg1	2012-10-14 15:07:17.000000000 +0530
+@@ -831,7 +831,7 @@
+ # performance data.
+ # Values: 1 = process performance data, 0 = do not process performance data
+ 
+-process_performance_data=0
++process_performance_data=1
+ 
+ 
+ 
+@@ -1337,5 +1337,22 @@
+ # get out of control when debugging Nagios.
+ 
+ max_debug_file_size=1000000
++####Pnp4Nagios###
++# service performance data
++#
++service_perfdata_file=/opt/nagios/addons/pnp/var/service-perfdata
++service_perfdata_file_template=DATATYPE::SERVICEPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tSERVICEDESC::$SERVICEDESC$\tSERVICEPERFDATA::$SERVICEPERFDATA$\tSERVICECHECKCOMMAND::$SERVICECHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$\tSERVICESTATE::$SERVICESTATE$\tSERVICESTATETYPE::$SERVICESTATETYPE$
++service_perfdata_file_mode=a
++service_perfdata_file_processing_interval=15
++service_perfdata_file_processing_command=process-service-perfdata
++
++#
++# host performance data starting with Nagios 3.0
++# 
++host_perfdata_file=/opt/nagios/addons/pnp/var/host-perfdata
++host_perfdata_file_template=DATATYPE::HOSTPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tHOSTPERFDATA::$HOSTPERFDATA$\tHOSTCHECKCOMMAND::$HOSTCHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$
++host_perfdata_file_mode=a
++host_perfdata_file_processing_interval=15
++host_perfdata_file_processing_command=process-host-perfdata
+ 
+ 
